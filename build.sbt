@@ -1,5 +1,5 @@
 import BuildUtils._
-import de.heikoseeberger.sbtheader.license.Apache2_0
+//import de.heikoseeberger.sbtheader.license.Apache2_0
 import sbtdocker.DockerKeys.dockerBuildAndPush
 import sbtdocker.ImageName
 import sbtrelease.ReleasePlugin.autoImport.ReleaseTransformations._
@@ -14,9 +14,9 @@ startYear := Some(2016)
 licenses := Seq("Apache License, Version 2.0" -> url("https://www.apache.org/licenses/LICENSE-2.0.txt"))
 
 // Compile
-enablePlugins(AutomateHeaderPlugin)
+//enablePlugins(AutomateHeaderPlugin)
 name := s"sparklint-spark${getProjectNameSuffix(sparkVersion.value)}"
-scalaVersion := "2.11.8"
+scalaVersion := "2.11.12"
 crossScalaVersions := Seq("2.10.6", "2.11.8")
 unmanagedSourceDirectories in Compile += (sourceDirectory in Compile).value / getSparkMajorVersion(sparkVersion.value)
 unmanagedSourceDirectories in Test += (sourceDirectory in Test).value / getSparkMajorVersion(sparkVersion.value)
@@ -24,7 +24,7 @@ unmanagedSourceDirectories in Test += (sourceDirectory in Test).value / getSpark
 // Dependency
 // Spark
 lazy val sparkVersion = SettingKey[String]("spark-version", "The version of spark library to compile against")
-sparkVersion := "2.0.1"
+sparkVersion := "2.4.5"
 // Non-spark
 lazy val http4s = "0.15.5"
 lazy val optparse = "1.1.2"
@@ -79,9 +79,9 @@ assemblyMergeStrategy in assembly := {
 publishMavenStyle := true
 publishArtifact in Test := false
 
-headers := Map(
-  "scala" -> Apache2_0(startYear.value.get.toString, "Groupon, Inc.")
-)
+//headers := Map(
+  //"scala" -> Apache2_0(startYear.value.get.toString, "Groupon, Inc.")
+//)
 
 // Publish to Docker
 enablePlugins(DockerPlugin)
@@ -103,7 +103,7 @@ dockerfile in docker := {
 }
 
 // Release customization
-sonatypeProfileName := "com.groupon"
+//sonatypeProfileName := "com.groupon"
 deployBranch := "master"
 releaseProcess := Seq[ReleaseStep](
   checkSnapshotDependencies,
